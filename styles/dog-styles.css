@@ -4,7 +4,10 @@ body {
     justify-content: space-around;
     /* align-items: center; */ 
 }
-
+/* :root {
+    --thumbnails-image-width: 20vw;
+    --thumbnails-image-height: 18vw; */
+/* } */   
 .thumbnails-list {
     display: flex;
     flex-direction: row;
