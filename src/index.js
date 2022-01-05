@@ -1,17 +1,41 @@
 console.log("script launched");
 let detailsImage = document.querySelector(".details-images"); 
 let detailsTitle = document.querySelector(".details-title");  
-//let thumbnailsName = document.querySelectorAll(".thumbnails-title");
+let mainContentEl = document.querySelector(".main-content");
+let selectedItem;
 let anchors = document.querySelectorAll(".thumbnails-anchor"); //all html elements belonging to the class thumbnails-anchor
 for(let i = 0; i < anchors.length; i++)  {
     anchors[i].addEventListener("click", function(event) {
     event.preventDefault(); //cancelling default behavior of anchor element hitting
+    showDetails();
     setDetails(anchors[i]); //setDetail function call with passing reference to appropriate anchor
     })
 }
+
+
 function setDetails(anchor) {
     console.log("anchor element was pressed", anchor);
-    detailsImage.setAttribute("src", anchor.getAttribute("href"));
-   // detailsTitle.textContent = anchor.getAttribute("data-details-title"  );
-    detailsTitle.textContent = anchor.textContent+ ": " + anchor.getAttribute("data-details-title"  );
+    let hrefValue = anchor.getAttribute("href");    
+    detailsImage.setAttribute("src", hrefValue);
+    anchor.parentElement.classList.add("selected");
+    if(selectedItem){
+        selectedItem.classList.remove("selected")
+    }
+    selectedItem = anchor.parentElement;
+    //get element with thumbnail-title inside the given anchor
+    let thumbnailsTitleSelector = `[href="${hrefValue}"] .thumbnails-title`;
+    let thumbnailsTitleEl = document.querySelector (thumbnailsTitleSelector);
+    //dog name exist inside thumbnailsTitleEl.textContent
+    detailsTitle.textContent = `${thumbnailsTitleEl.textContent}: ${anchor.getAttribute('data-details-title')} ` ;
+
+}   
+
+function showDetails()  {
+    mainContentEl.classList.remove('hidden');
 }
+function hideDetails() {
+   mainContentEl.classList.add('hidden');
+   selectedItem.classList.remove("selected");
+} 
+   
+
