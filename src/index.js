@@ -27,13 +27,16 @@ function setDetails(anchor) {
     //get element with thumbnail-title inside the given anchor
     let thumbnailsTitleSelector = `[href="${hrefValue}"] .thumbnails-title`;
     let thumbnailsTitleEl = document.querySelector (thumbnailsTitleSelector);
+    //dog name exist inside thumbnailsTitleEl.textContent
+    detailsTitle.textContent = `${thumbnailsTitleEl.textContent}: ${anchor.getAttribute('data-details-title')} `;
     
     let thumbnailsSoundSelector = `[href="${hrefValue}"] .thumbnails-sound`;
     let thumbnailsSoundElement = document.querySelector(thumbnailsSoundSelector);
-    let addressBarkl = thumbnailsSoundElement.getAttribute("src");
-    //dog name exist inside thumbnailsTitleEl.textContent
-    detailsTitle.textContent = `${thumbnailsTitleEl.textContent}: ${anchor.getAttribute('data-details-title')} ` ;
-    centrSound.setAttribute("src", addressBarkl);
+    
+    
+    centrSound.setAttribute("src", thumbnailsSoundElement.getAttribute("src"));
+
+
     centrSound.muted = false;
     setTimeout(addMute, 900);
     
